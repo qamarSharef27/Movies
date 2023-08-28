@@ -1,0 +1,184 @@
+body {
+
+    background-image: url('./images/movie77.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.header{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic ;
+    
+}
+.header h1{
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+inset -4px -4px 6px 0 rgba(255,255,255,.2),
+inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+border-radius: 30px;
+padding: 10px 20px;
+
+}
+
+.main{
+
+    display: grid;
+    grid-template-columns: auto ;
+    margin-top: 50px;
+    position: relative;
+}
+
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#searchLabel{
+    width: 120px;
+	height: 30px;
+    border-radius: 30px;
+    padding: 10px 20px;
+    /*background-color: white;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 18px/1 system-ui, sans-serif;
+    text-align: center;
+    font-weight:bold ;
+    font-style: italic ;
+    transition: 0.8s;
+    padding: 5px 10px;
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+
+}
+
+.search2{
+    border-radius: 30px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.8s;
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+input::placeholder {
+    color: black;
+}
+
+.search2:hover > .searchInput{
+    width: 220px;
+}
+
+.search2 .searchInput{
+    background: transparent;
+    border: none;
+    outline:none;
+    width: 0px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: 0.8s;
+
+}
+
+.search2 .search-btn .fas{
+    color: #141414;
+}
+
+@keyframes hoverShake {
+  0% {transform: skew(0deg,0deg);}
+  25% {transform: skew(5deg, 5deg);}
+  75% {transform: skew(-5deg, -5deg);}
+  100% {transform: skew(0deg,0deg);}
+}
+
+.search2:hover{
+  animation: hoverShake 0.15s linear 3;
+}
+
+
+#searchResults {
+
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+
+}
+
+
+.form {
+
+    max-width: 400px;
+	width: 100%;
+    min-height: 600px;
+    height: 100px;
+	/*background: rgb(234, 222, 183);*/
+   /* background: rgb(136, 114, 89);*/
+	padding: 40px;
+	border-radius: 20px;
+   /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 2); */
+    overflow: scroll;
+   background-image: url('./images/movie9.jpg');
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+inset -4px -4px 6px 0 rgba(255,255,255,.2),
+inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+    
+}
+
+.collapsible {
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+
+  .collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+
+  .active:after {
+    content: "\2212";
+  }
+  
+  .content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+  }
+  
+  p img {
+    width: 250px;
+    height: 250px;
+  }
+
+  p {
+    color: white;
+  }
+
+  button {
+    background-color: black;
+  }
