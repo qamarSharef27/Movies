@@ -1,5 +1,6 @@
 # Movies App Project
 Welcome to the Search Movies App Project, this is a simple Movies app using API integration and DOM manipulation by **JavaScript**, **HTML**, and **CSS** that Represent populer Movies.
+
 ![Movie App photo](./images/movie.png)
 
 ---
@@ -30,7 +31,7 @@ You can check out the live demo of the project on <a href="https://qamarsharef27
 To get the project on your local machine, follow these steps:
 
 1. Open a command-line interface **(Terminal)**.
-1. **Clone the Repository:** Clone this repository to your local machine using the following command: git clone <https://github.com qamarSharef27/Movies>
+1. **Clone the Repository:** Clone this repository to your local machine using the following command: git clone <https://github.com .qamarSharef27/Movies>
 2. **Navigate to the Project Directory:** Change your working directory to the project folder: cd Movies
 3. **Run the Application:** Open the `index.html` file in your preferred web browser to interact with the app locally, You can either double-click the index.html file in your file explorer, or you can run the following command in the terminal: open index.html
 
