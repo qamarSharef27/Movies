@@ -6,31 +6,37 @@
     <link rel="stylesheet" href="./style.css">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+   <link rel="preload" as="font" href="https://use.fontawesome.com/releases/v5.6.1/webfonts/fa-solid-900.woff2" type="font/woff2" crossorigin>
+
     <title>Search Movie</title>
 </head>
 <body>
     
+    <div class = "container">
+
     <header class="header">
         <h1>Movie Search App</h1>
+        <div class="search">
+            <div class="search2">
+            <input type="text" name="search" placeholder="Search for a movie by Title: " id="searchValue" class="searchInput" aria-label="Search for movie">
+            <a href="#" class="search-btn">
+            <i class="fas fa-search"></i>      
+            </a>
+            </div>
+            </div>
     </header>
 
     <main class="main">
 
-        <div class="search">
-        <label id="searchLabel">Movie Title:</label>
-        <div class="search2">
-        <input type="text" name="search" placeholder="Search for a movie: " id="searchValue" class="searchInput" aria-label="Search for movie">
-        <a href="#" class="search-btn">
-        <i class="fas fa-search"></i>      
-        </a>
-        </div>
-        </div>
+        <div class="responsive">
 
-        <div id="searchResults">
-            <form class="form">
-            <ul id = "movieList" ></ul>
-            </form>
-        </div>
+            <div class="searchResults">
+
+
+            </div>
+
+          </div>
+          </div>
 
     </main>
 

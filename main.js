@@ -1,35 +1,39 @@
 
-const url = 'https://imdb8.p.rapidapi.com/auto-complete?q=*';
+const url = 'https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=*';
 const options = {
-method: 'GET',
-headers: {
-    'X-RapidAPI-Key': 'dbbd273f02mshd405ce6e2755b1cp1be80djsne2ac269265e9',
-    'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
-}
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'a1b1494a5dmsh2a30439f2541b5dp12737fjsn99efdbbfaaa4',
+		'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
+	}
 };
 
- const movieList = document.getElementById("movieList");
- const movieDetails = document.getElementById("movieDetails");
+const ResultDiv = document.querySelector(".searchResults");
 
  let movies = [];
+ var d = 0;
 
   function MovieDetails(movieName) {
-    fetch(`https://imdb8.p.rapidapi.com/auto-complete?q=${movieName}`, options)
+    fetch(`https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=${movieName}`, options)
         .then(response => response.json())
         .then(data => {
-            const list = data.d;
+            const list = data.data;
 
-            list.forEach(item => {
-                const movieName = item.l;
-                const poster = item.i.imageUrl;
-                const year = item.y;
-                const rank = item.rank;
+                list.forEach(item => {
+                const movieTitle  = item.title;
+                const poster = item.image;
+                const stars = item.stars;
 
-                const titleButton = `<button class="collapse">${movieName}</button>`;
-                const divTitle = `<div class="content"><p><b>Movie Poster:</b> <img src="${poster}"><br><b>Published year:</b>${year}<br><b>Movie Rank:</b> ${rank}<br></p></div>`;
+                const picture = `<img src="${poster}" alt="movie" class = "picture">`;
+                const description = `<div class="description"><p><b> Movie Name: </b> ${movieTitle } <br></br> <b> Movie Stars: </b> ${stars} <br></p></div>`;               
 
-                const movie = `<li class="class1">${titleButton + divTitle}</li>`;
-                movieList.innerHTML += movie;
+
+                const newDiv = `<div class="new">${picture + description}</div>`;
+
+
+                ResultDiv.innerHTML += newDiv;
+                
+                d += 1;
 
             });
 
@@ -60,11 +64,12 @@ const searchInput = document.getElementById("searchValue");
 searchInput.addEventListener("keyup", (event) => {
 
     if (event.key === "Enter") {
+        event.preventDefault(); 
         const MovieTitle = searchInput.value.trim();
         movies.push(MovieTitle); 
         localStorage.setItem("movies", JSON.stringify(movies));
         MovieDetails(MovieTitle); 
-        searchInput.textContent = "";
+        searchInput.value = "";
     }
 
 });
