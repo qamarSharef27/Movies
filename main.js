@@ -13,7 +13,7 @@ headers: {
 
  let movies = [];
 
-function MovieDetails(movieName) {
+  function MovieDetails(movieName) {
     fetch(`https://imdb8.p.rapidapi.com/auto-complete?q=${movieName}`, options)
         .then(response => response.json())
         .then(data => {
@@ -25,12 +25,12 @@ function MovieDetails(movieName) {
                 const year = item.y;
                 const rank = item.rank;
 
-                const titleButton = `<button class="collapsible">${movieName}</button>`;
-                const divTitle = `<div class="content"></div>`;
-                const detailsContent = `<p><b>Movie Poster:</b> <img src="${poster}"><br><b>Published year:</b>${year}<br><b>Movie Rank:</b> ${rank}<br></p>`;
+                const titleButton = `<button class="collapse">${movieName}</button>`;
+                const divTitle = `<div class="content"><p><b>Movie Poster:</b> <img src="${poster}"><br><b>Published year:</b>${year}<br><b>Movie Rank:</b> ${rank}<br></p></div>`;
 
-                const movie = `<li class="class1">${titleButton + divTitle + detailsContent}</li>`;
+                const movie = `<li class="class1">${titleButton + divTitle}</li>`;
                 movieList.innerHTML += movie;
+
             });
 
            
@@ -50,7 +50,7 @@ if (Array.isArray(storedMovies)) {
 }
 }
 
-else if (storedMovies === null){
+else if (storedMovies == null){
     MovieDetails("*"); 
 }
    
@@ -70,6 +70,7 @@ searchInput.addEventListener("keyup", (event) => {
 });
 
 
+   
 
 
 
