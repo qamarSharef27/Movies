@@ -1,7 +1,7 @@
 # Movies App Project
 Welcome to the Search Movies App Project, this is a simple Movies app using API integration and DOM manipulation by **JavaScript**, **HTML**, and **CSS** that Represent popular Movies.
 
-![Movie App photo](./images/movie.png)
+![Movie App photo](./images/movies.png)
 
 ---
 ## Description 
