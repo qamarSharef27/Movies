@@ -7,6 +7,7 @@ body {
    align-items: center;
    justify-content: center;
    font-style: italic;
+   font-weight: bold;
    grid-template-columns: auto;
 }
 
@@ -113,3 +114,5 @@ div.description {
        width: auto;
    }
 }
+
+
