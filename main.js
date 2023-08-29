@@ -1,5 +1,6 @@
 
 const url = 'https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=*';
+
 const options = {
 	method: 'GET',
 	headers: {
@@ -11,13 +12,13 @@ const options = {
 const ResultDiv = document.querySelector(".searchResults");
 const searchHistory = document.getElementById('searchHistory');
 
-
  let movies = [];
 
   function MovieDetails(movieName) {
     fetch(`https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=${movieName}`, options)
         .then(response => response.json())
         .then(({ data: list }) => {
+
             list.forEach(({ title: movieTitle, image: poster, stars }) => {
                 
                 const picture = `<img src="${poster}" alt="movie" class = "picture">`;
