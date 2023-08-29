@@ -3,12 +3,14 @@ const url = 'https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=*';
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'a1b1494a5dmsh2a30439f2541b5dp12737fjsn99efdbbfaaa4',
+		'X-RapidAPI-Key': '7609401c6cmsh3b3ffd091b80555p153e3ejsn1c3b6347f857',
 		'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
 	}
 };
 
 const ResultDiv = document.querySelector(".searchResults");
+const searchHistory = document.getElementById('searchHistory');
+
 
  let movies = [];
  var d = 0;
@@ -18,7 +20,6 @@ const ResultDiv = document.querySelector(".searchResults");
         .then(response => response.json())
         .then(data => {
             const list = data.data;
-
                 list.forEach(item => {
                 const movieTitle  = item.title;
                 const poster = item.image;
@@ -75,7 +76,30 @@ searchInput.addEventListener("keyup", (event) => {
 });
 
 
-   
+/*function showSearchHistory() {
+
+    searchHistory.innerHTML = '';
+    
+    storedMovies.forEach(item => {
+    searchHistory.append(item);
+
+    });
+
+    searchHistory.classList.add('show');
+}
+
+function hideSearchHistory() {
+    searchHistory.classList.remove('show');
+}
+
+searchInput.addEventListener('click', showSearchHistory);
+
+document.addEventListener('click', (event) => {
+    if (!searchHistory.contains(event.target) && event.target !== searchInput) {
+        hideSearchHistory();
+    }
+});*/
+
 
 
 
