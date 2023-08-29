@@ -13,18 +13,13 @@ const searchHistory = document.getElementById('searchHistory');
 
 
  let movies = [];
- var d = 0;
 
   function MovieDetails(movieName) {
     fetch(`https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=${movieName}`, options)
         .then(response => response.json())
-        .then(data => {
-            const list = data.data;
-                list.forEach(item => {
-                const movieTitle  = item.title;
-                const poster = item.image;
-                const stars = item.stars;
-
+        .then(({ data: list }) => {
+            list.forEach(({ title: movieTitle, image: poster, stars }) => {
+                
                 const picture = `<img src="${poster}" alt="movie" class = "picture">`;
                 const description = `<div class="description"><p><b> Movie Name: </b> ${movieTitle } <br></br> <b> Movie Stars: </b> ${stars} <br></p></div>`;               
 
@@ -34,10 +29,8 @@ const searchHistory = document.getElementById('searchHistory');
 
                 ResultDiv.innerHTML += newDiv;
                 
-                d += 1;
 
             });
-
            
         })
         .catch(err => console.log(err));
@@ -75,30 +68,6 @@ searchInput.addEventListener("keyup", (event) => {
 
 });
 
-
-/*function showSearchHistory() {
-
-    searchHistory.innerHTML = '';
-    
-    storedMovies.forEach(item => {
-    searchHistory.append(item);
-
-    });
-
-    searchHistory.classList.add('show');
-}
-
-function hideSearchHistory() {
-    searchHistory.classList.remove('show');
-}
-
-searchInput.addEventListener('click', showSearchHistory);
-
-document.addEventListener('click', (event) => {
-    if (!searchHistory.contains(event.target) && event.target !== searchInput) {
-        hideSearchHistory();
-    }
-});*/
 
 
 
