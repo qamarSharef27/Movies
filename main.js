@@ -4,7 +4,7 @@ const url = 'https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=*';
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'dcd7afa16emsh31bc83b2e3c0b01p1b8e80jsnbdccd3c0d71e',
+		'X-RapidAPI-Key': 'fc9bd65e17msh78d99ab103bf137p19d812jsn8513f15d98a1',
 		'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
 	}
 };
@@ -56,20 +56,32 @@ else if (storedMovies == null){
 
 const searchInput = document.getElementById("searchValue");
 
+
 searchInput.addEventListener("keyup", (event) => {
 
     if (event.key === "Enter") {
         event.preventDefault(); 
+
+        document.querySelector(".new").innerHTML = "";
+
         const MovieTitle = searchInput.value.trim();
-        movies.push(MovieTitle); 
-        localStorage.setItem("movies", JSON.stringify(movies));
-        MovieDetails(MovieTitle); 
-        searchInput.value = "";
+        storedMovies.unshift(MovieTitle);
+
+        localStorage.setItem("movies", JSON.stringify(storedMovies));
+        const movie = storedMovies;
+
+        movie.forEach(Title => {
+            MovieDetails(Title); 
+        });
     }
 
 });
 
 
+searchInput.addEventListener("click", (event) => {
+
+        searchInput.value = "";
 
 
+});
 
