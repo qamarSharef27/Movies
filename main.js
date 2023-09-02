@@ -4,7 +4,7 @@ const url = 'https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=*';
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'fc9bd65e17msh78d99ab103bf137p19d812jsn8513f15d98a1',
+		'X-RapidAPI-Key': 'b0770d5857mshc600ad7208fbf5cp1c3b22jsnb46c8b13d3e0',
 		'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
 	}
 };
@@ -12,76 +12,56 @@ const options = {
 const ResultDiv = document.querySelector(".searchResults");
 const searchHistory = document.getElementById('searchHistory');
 
- let movies = [];
+let movies = [];
 
-  function MovieDetails(movieName) {
-    fetch(`https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=${movieName}`, options)
-        .then(response => response.json())
-        .then(({ data: list }) => {
+function MovieDetails(movieName) {
+    ResultDiv.innerHTML = ""; 
 
-            list.forEach(({ title: movieTitle, image: poster, stars }) => {
-                
-                const picture = `<img src="${poster}" alt="movie" class = "picture">`;
-                const description = `<div class="description"><p><b> Movie Name: </b> ${movieTitle } <br></br> <b> Movie Stars: </b> ${stars} <br></p></div>`;               
+  fetch(`https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=${movieName}`, options)
+    .then(response => response.json())
+    .then(({ data: list }) => {
 
-
-                const newDiv = `<div class="new">${picture + description}</div>`;
-
-
-                ResultDiv.innerHTML += newDiv;
-                
-
-            });
-           
-        })
-        .catch(err => console.log(err));
+      list.forEach(({ title: movieTitle, image: poster, stars }) => {
+        const picture = `<img src="${poster}" alt="movie" class="picture">`;
+        const description = `<div class="description"><p><b> Movie Name: </b> ${movieTitle } <br></br> <b> Movie Stars: </b> ${stars} <br></p></div>`;
+        const newDiv = `<div class="new">${picture + description}</div>`;
+        ResultDiv.innerHTML += newDiv;
+      });
+    })
+    .catch(err => console.log(err));
 }
 
-const storedMovies = JSON.parse(localStorage.getItem("movies"));
+const storedMovies = JSON.parse(localStorage.getItem("movies")) || [];
 
-if (storedMovies !== null){
+function displayStoredMovies() {
+  ResultDiv.innerHTML = ""; 
 
-if (Array.isArray(storedMovies)) {
-    movies = storedMovies;
-    storedMovies.forEach(movieTitle => {
-        MovieDetails(movieTitle); 
-    });
-}
+  storedMovies.forEach(movieTitle => {
+    MovieDetails(movieTitle);
+  });
 }
 
-else if (storedMovies == null){
-    MovieDetails("*"); 
+if (storedMovies.length === 0) {
+  MovieDetails("*");
+} else {
+  displayStoredMovies();
 }
-   
 
 const searchInput = document.getElementById("searchValue");
 
-
 searchInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
 
-    if (event.key === "Enter") {
-        event.preventDefault(); 
+    const movieTitle = searchInput.value.trim();
+    storedMovies.unshift(movieTitle);
 
-        document.querySelector(".new").innerHTML = "";
+    localStorage.setItem("movies", JSON.stringify(storedMovies));
 
-        const MovieTitle = searchInput.value.trim();
-        storedMovies.unshift(MovieTitle);
-
-        localStorage.setItem("movies", JSON.stringify(storedMovies));
-        const movie = storedMovies;
-
-        movie.forEach(Title => {
-            MovieDetails(Title); 
-        });
-    }
-
+    displayStoredMovies();
+  }
 });
-
 
 searchInput.addEventListener("click", (event) => {
-
-        searchInput.value = "";
-
-
+  searchInput.value = "";
 });
-
