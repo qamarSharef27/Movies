@@ -1,75 +1,63 @@
 
-const url = 'https://imdb8.p.rapidapi.com/auto-complete?q=*';
+const url = 'https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=*';
+
 const options = {
-method: 'GET',
-headers: {
-    'X-RapidAPI-Key': 'dbbd273f02mshd405ce6e2755b1cp1be80djsne2ac269265e9',
-    'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
-}
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '65fee9fa11msh3dbb751cc4b151fp1b0d12jsn33a61633b290',
+		'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
+	}
 };
 
- const movieList = document.getElementById("movieList");
- const movieDetails = document.getElementById("movieDetails");
 
- let movies = [];
+const ResultDiv = document.querySelector(".searchResults");
+const searchHistory = document.getElementById('searchHistory');
+
+let movies = [];
 
 function MovieDetails(movieName) {
-    fetch(`https://imdb8.p.rapidapi.com/auto-complete?q=${movieName}`, options)
-        .then(response => response.json())
-        .then(data => {
-            const list = data.d;
+  ResultDiv.innerHTML = "";
 
-            list.forEach(item => {
-                const movieName = item.l;
-                const poster = item.i.imageUrl;
-                const year = item.y;
-                const rank = item.rank;
+  fetch(`https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=${movieName}`, options)
+    .then(response => response.json())
+    .then(({ data: list }) => {
+      list.forEach(({ title: movieTitle, image: poster, stars }) => {
+        const picture = `<img src="${poster}" alt="movie" class="picture">`;
+        const description = `<div class="description"><p><b> Movie Name: </b> ${movieTitle } <br></br> <b> Movie Stars: </b> ${stars} <br></p></div>`;
+        const newDiv = `<div class="new">${picture + description}</div>`;
+        ResultDiv.innerHTML += newDiv;
+      });
 
-                const titleButton = `<button class="collapsible">${movieName}</button>`;
-                const divTitle = `<div class="content"></div>`;
-                const detailsContent = `<p><b>Movie Poster:</b> <img src="${poster}"><br><b>Published year:</b>${year}<br><b>Movie Rank:</b> ${rank}<br></p>`;
-
-                const movie = `<li class="class1">${titleButton + divTitle + detailsContent}</li>`;
-                movieList.innerHTML += movie;
-            });
-
-           
-        })
-        .catch(err => console.log(err));
+      localStorage.setItem("movies", JSON.stringify([movieName]));
+    })
+    .catch(err => console.log(err));
 }
-
-const storedMovies = JSON.parse(localStorage.getItem("movies"));
-
-if (storedMovies !== null){
-
-if (Array.isArray(storedMovies)) {
-    movies = storedMovies;
-    storedMovies.forEach(movieTitle => {
-        MovieDetails(movieTitle); 
-    });
-}
-}
-
-else if (storedMovies === null){
-    MovieDetails("*"); 
-}
-   
 
 const searchInput = document.getElementById("searchValue");
 
 searchInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
 
-    if (event.key === "Enter") {
-        const MovieTitle = searchInput.value.trim();
-        movies.push(MovieTitle); 
-        localStorage.setItem("movies", JSON.stringify(movies));
-        MovieDetails(MovieTitle); 
-        searchInput.textContent = "";
-    }
+    const movieTitle = searchInput.value.trim();
 
+    localStorage.clear();
+    MovieDetails(movieTitle);
+
+    searchInput.placeholder = movieTitle;
+
+  }
 });
 
+searchInput.addEventListener("click", (event) => {
+  searchInput.value = "";
+});
 
+const storedMovies = JSON.parse(localStorage.getItem("movies")) || [];
 
-
-
+if (storedMovies.length === 0) {
+  MovieDetails("*");
+} else {
+  MovieDetails(storedMovies[0]);
+  searchInput.placeholder = storedMovies[0];
+}
