@@ -61,3 +61,7 @@ if (storedMovies.length === 0) {
   MovieDetails(storedMovies[0]);
   searchInput.placeholder = storedMovies[0];
 }
+
+searchInput.addEventListener('click', function() {
+  searchInput.placeholder = 'Search for a movie by Title: ';
+});
